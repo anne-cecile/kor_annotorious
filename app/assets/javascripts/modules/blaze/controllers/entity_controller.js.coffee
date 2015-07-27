@@ -2,8 +2,54 @@ kor.controller('entity_controller', [
   '$scope', 'korData', 'relationships_service', '$routeParams', 'entities_service', '$location',
   (scope, kd, rss, rp, es, l) ->
     promise = es.show(rp.id)
-    promise.success (data) -> scope.entity = data
+    promise.success (data) -> 
+      console.log('entity loaded')
+      scope.entity = data
     promise.error (data) -> l.path("/denied")
+
+          # Annotorious module
+    
+    scope.checked = false
+    scope.show = false
+    scope.toggle_checked = (event) -> 
+        event.preventDefault()
+        console.log("switch division")
+        if scope.checked
+          console.log("false")
+          scope.checked = false
+        else
+          console.log("true") 
+          scope.checked = true 
+    scope.tg = (event) ->
+      event.preventDefault()
+      console.log("je veux voir les annotations enregistrées")
+      if scope.show
+        scope.show = false
+        console.log("show false")
+      else
+        console.log("show true")
+        scope.show = true
+    scope.myannos = [
+      {
+              src : 'http://localhost:3000/media/images/screen/000/000/001/image.jpg?1436190828',
+              text : 'My annotation',
+              shapes : [{
+                  type : 'rect',
+                  geometry : { x : 0.12, y: 0.14482758620689656, width : 0.215, height: 0.1413793103448276 }
+                }]
+            }]
+    
+    #scope.light = (annotation) ->
+    #  console.log("illuminer une annotation")
+
+    window.x = scope
+
+    scope.removeAllAnno = (myannos) ->
+      alert("Do you want to delete all annotations ?")
+      scope.myannos = []
+
+    scope.hideAllAnno= (myannos) ->
+      alert("Do you want to HIDE all annotations ?")
 
     scope.page_deep_media = (relationship, page = 1, event) ->
       event.preventDefault() if event

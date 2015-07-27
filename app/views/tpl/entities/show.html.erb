@@ -1,6 +1,48 @@
-<div class="entities-show" ng-controller="entity_controller" ng-cloak="true">
-  <div class="layout_panel left normal_panel_size">
 
+  <div class="entities-show" ng-controller="entity_controller" ng-cloak="true">
+  <!-- annotation -->
+  <div ng-show="checked">
+    <div class="section_panel">
+      <a href="#" ng-click="toggle_checked($event)" style="font-weight:bold">Quit annotations view mode</a><br/>
+        <div class="header">
+          
+          <div kor-anno="myannos">
+            <div class="title" ng-bind="entity.display_name" style="margin-bottom: 5px;"></div> 
+            <!-- link to medium -->
+              <img 
+                alt="Image" 
+                class="annotation kor_medium" 
+                ng-src="{{entity.medium.url | image_size:'screen'}}" 
+                style="width:100%" id="myImage" 
+                image-visible="checked"
+              >
+              <button 
+                ng-click="tg($event)" 
+                style="margin-top: 5px;"
+              >Edit a list of annotations</button>
+              <!--<button 
+                ng-click="hideAllAnno(myannos)" 
+                style="float: right; margin-top: 5px; ">Hide all annotations</button> -->
+              <button 
+                ng-click="removeAllAnno(myannos)" 
+                style="float: right; margin-top: 5px; ">Delete all annotations</button>
+              <div class="show_annos" ng-show="show"> 
+                <div ng-repeat="annotation in myannos"> 
+                  <!--<button
+                    ng-click="light(annotation)"
+                    class="light"
+                    style="margin-top: 5px;">
+                  Annotation
+                  </button>-->
+                  <p ng-bind="annotation.text" style="display: block; "></p>
+                </div>          
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="layout_panel left normal_panel_size" ng-hide="checked">
     <div class="layout_panel top metadata">
       <div class="section_panel">
         <div class="header">
@@ -366,13 +408,15 @@
     
   </div>
 
-  <div class="layout_panel right small_panel_size">
+  <!-- Partie contenant l'image droite -->
+  <div class="layout_panel right small_panel_size" ng-hide="checked">
+
     <div class="content_panel">
       <div class="viewer" ng-show="entity.medium_id">
         <div class="title" ng-bind="'activerecord.models.medium' | translate | capitalize"></div>
         
         <div class="kor_medium_frame" id="kor_medium_frame_{{entity.id}}">
-          <a href="/media/{{entity.medium.id}}">
+          <a href="/media/{{entity.medium.id}}" ng-click="toggle_checked($event)">
             <img alt="Image" class="kor_medium" ng-src="{{entity.medium.url | image_size:'preview'}}">
           </a>
         </div>

@@ -6,16 +6,16 @@
   
     = render :partial => "layouts/metas"
 
+    = javascript_include_tag 'annotorious-0.6.3/src/annotorious.min.js'
     = stylesheet_link_tag 'master'
     = stylesheet_link_tag 'blaze'
+    = stylesheet_link_tag 'annotorious-0.6.3/css/annotorious.css'
     = javascript_include_tag 'blaze'
-    
+
+
     = render :partial => 'layouts/javascript_settings'
     
     = render :partial => 'layouts/title'
-    
-    %style{:type => "text/javascript"}
-      [ng-cloak] {display: none;}
 
   %body.blaze_style{'style' => "background-color: #1e1e1e !important"}
     = render :partial => "layouts/blaze_header"
