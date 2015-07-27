@@ -1,6 +1,8 @@
 kor.controller('entity_controller', [
   '$scope', 'korData', 'relationships_service', '$routeParams', 'entities_service', '$location',
   (scope, kd, rss, rp, es, l) ->
+    window.cs = scope
+ 
     promise = es.show(rp.id)
     promise.success (data) -> 
       console.log('entity loaded')
@@ -31,13 +33,14 @@ kor.controller('entity_controller', [
         scope.show = true
     scope.myannos = [
       {
-              src : 'http://localhost:3000/media/images/screen/000/000/001/image.jpg?1436190828',
+              src : 'http://localhost:3000/media/images/screen/000/141/426/image.jpg?1437771164',
               text : 'My annotation',
               shapes : [{
                   type : 'rect',
                   geometry : { x : 0.12, y: 0.14482758620689656, width : 0.215, height: 0.1413793103448276 }
                 }]
             }]
+    scope.$watch "myannos", (-> console.log "MYANNOS changed: ", scope.myannos), true
     
     #scope.light = (annotation) ->
     #  console.log("illuminer une annotation")

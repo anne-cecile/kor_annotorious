@@ -3,7 +3,7 @@ kor.directive "korAnno", [
   (http, to) ->
     directive = {
       scope:
-        iv: "&imageVisible"
+        # iv: "&imageVisible"
         annos: "=korAnno"
         hide: "&ngClick"
 
@@ -12,6 +12,7 @@ kor.directive "korAnno", [
       
         doit = ->
           console.log "doit"
+          anno.reset()
           anno.makeAnnotatable(myImage[0])
           for a in scope.annos
             anno.addAnnotation(a)
@@ -33,9 +34,10 @@ kor.directive "korAnno", [
         #  console.log "light changed: #{a}"
         #  anno.highlightAnnotation(scope.annos)
 
-        anno.addHandler 'onAnnotationCreated', ->
-          annotations = anno.getAnnotations()
-          scope.annos = annotations
+        anno.addHandler 'onAnnotationCreated', (a) ->
+          # annotations = anno.getAnnotations()
+          # scope.annos = annotations
+          scope.annos.push(a)
           scope.$apply()
 
         #aa = ->
@@ -52,25 +54,25 @@ kor.directive "korAnno", [
         #    }
         #  )
 
-        anno.addHandler 'onAnnotationRemoved', ->
-          alert "Do you want to remove this annotation ?"
-          anno.removeAnnotation(scope.annos)
-          annotations = anno.getAnnotations()
-          scope.annos = annotations
-          console.log(scope.annos)
+        anno.addHandler 'onAnnotationRemoved', (a) ->
+          i = scope.annos.indexOf(a)
+          scope.annos.splice i, 1
+          # alert "Do you want to remove this annotation ?"
+          # anno.removeAnnotation(scope.annos)
+          # annotations = anno.getAnnotations()
+          # scope.annos = annotations
+          # console.log(scope.annos)
           scope.$apply()
 
         #attrs.$observe 'src', (value) ->
         #  console.log value
 
         myImage = jQuery('img.annotation')
-        $(myImage).load ->
-         console.log('loaded')
-        $(myImage).ready ->
-          console.log('ready')
-        if myImage 
-          console.log("img picked up")
-          console.log(myImage)
+        img = element.find('img.annotation')
+        console.log "EARLY", img.width(), img.height()
+        img.bind "load", ->
+          console.log "EVENT", img.width(), img.height()
+          doit()
 
         #myLight = jQuery('button.light')
         #console.log myLight
@@ -81,8 +83,10 @@ kor.directive "korAnno", [
         window.d = aa
         window.z = add
         window.c = scope.annos
+
+
         
-        to(doit, 2500)
+        # to(doit, 2500)
         #to(aa, 2500)
 
       priority: 100

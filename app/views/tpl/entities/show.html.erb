@@ -1,9 +1,9 @@
 
   <div class="entities-show" ng-controller="entity_controller" ng-cloak="true">
   <!-- annotation -->
-  <div ng-show="checked">
+  <div ng-if="checked">
     <div class="section_panel">
-      <a href="#" ng-click="toggle_checked($event)" style="font-weight:bold">Quit annotations view mode</a><br/>
+      <a href="#" ng-click="toggle_checked($event)" style="font-weight:bold">Quit annotation view</a><br/>
         <div class="header">
           
           <div kor-anno="myannos">
@@ -19,21 +19,21 @@
               <button 
                 ng-click="tg($event)" 
                 style="margin-top: 5px;"
-              >Edit a list of annotations</button>
-              <!--<button 
+              >List all annotations</button>
+              <button 
                 ng-click="hideAllAnno(myannos)" 
-                style="float: right; margin-top: 5px; ">Hide all annotations</button> -->
+                style="float: right; margin-top: 5px; ">Hide all annotations</button>
               <button 
                 ng-click="removeAllAnno(myannos)" 
                 style="float: right; margin-top: 5px; ">Delete all annotations</button>
               <div class="show_annos" ng-show="show"> 
                 <div ng-repeat="annotation in myannos"> 
-                  <!--<button
+                  <button
                     ng-click="light(annotation)"
                     class="light"
                     style="margin-top: 5px;">
                   Annotation
-                  </button>-->
+                  </button>
                   <p ng-bind="annotation.text" style="display: block; "></p>
                 </div>          
               </div>
