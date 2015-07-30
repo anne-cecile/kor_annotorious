@@ -31,15 +31,7 @@ kor.controller('entity_controller', [
       else
         console.log("show true")
         scope.show = true
-    scope.myannos = [
-      {
-              src : 'http://localhost:3000/media/images/screen/000/141/426/image.jpg?1437771164',
-              text : 'My annotation',
-              shapes : [{
-                  type : 'rect',
-                  geometry : { x : 0.12, y: 0.14482758620689656, width : 0.215, height: 0.1413793103448276 }
-                }]
-            }]
+    scope.myannos = []
     scope.$watch "myannos", (-> console.log "MYANNOS changed: ", scope.myannos), true
     
     #scope.light = (annotation) ->
@@ -50,7 +42,6 @@ kor.controller('entity_controller', [
     scope.removeAllAnno = (myannos) ->
       alert("Do you want to delete all annotations ?")
       scope.myannos = []
-
     scope.hideAllAnno= (myannos) ->
       alert("Do you want to HIDE all annotations ?")
 

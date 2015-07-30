@@ -83,10 +83,8 @@ kor.directive "korAnno", [
         window.d = aa
         window.z = add
         window.c = scope.annos
-
-
         
-        # to(doit, 2500)
+        #to(doit, 2500)
         #to(aa, 2500)
 
       priority: 100
